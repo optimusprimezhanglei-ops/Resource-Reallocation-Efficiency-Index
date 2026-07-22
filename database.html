@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库 | Data Explorer — 资源重配置学派</title>
+<meta name="description" content="资源重配置效率（RE）跨国示意性数据库：可检索、可排序的国家级 V/C/F/RE 数据表格与交互式对比图表。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body class="lang-zh">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">RE</span>
+      <span class="brand-text" data-lang="zh">资源重配置学派</span>
+      <span class="brand-text" data-lang="en">Resource Reallocation School</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html" data-lang="zh">首页</a><a href="index.html" data-lang="en">Home</a></li>
+        <li><a href="paper.html" data-lang="zh">理论全文</a><a href="paper.html" data-lang="en">Full Paper</a></li>
+        <li><a href="dimensions.html" data-lang="zh">维度拆解</a><a href="dimensions.html" data-lang="en">Dimensions</a></li>
+        <li><a href="comparison.html" data-lang="zh">理论比较</a><a href="comparison.html" data-lang="en">Comparison</a></li>
+        <li><a href="database.html" data-lang="zh">数据库</a><a href="database.html" data-lang="en">Data Explorer</a></li>
+        <li><a href="sources.html" data-lang="zh">数据来源</a><a href="sources.html" data-lang="en">Data Sources</a></li>
+        <li><a href="glossary.html" data-lang="zh">术语表</a><a href="glossary.html" data-lang="en">Glossary</a></li>
+        <li><a href="calculator.html" class="nav-cta" data-lang="zh">RE 计算器</a><a href="calculator.html" class="nav-cta" data-lang="en">RE Calculator</a></li>
+      </ul>
+    </nav>
+    <button class="lang-toggle-btn">EN</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding: 48px 0 36px;">
+    <div class="container">
+      <span class="eyebrow" data-lang="zh">数据探索 · 跨国示意性数据库</span>
+      <span class="eyebrow" data-lang="en">Data Exploration · Illustrative Cross-Country Database</span>
+      <h1 style="font-size:2rem;" data-lang="zh">RE 跨国数据库：可检索、可排序、可对比</h1>
+      <h1 style="font-size:2rem;" data-lang="en">RE Cross-Country Data Explorer: Searchable, Sortable, Comparable</h1>
+      <p class="lede" data-lang="zh">本页收录 15 个示意性国家案例在 <strong>2019、2021、2023</strong> 三个年份的面板数据，涵盖 V（反应弹性）、C（转化率）、F（制度摩擦）及 RE 综合得分，并附带四个原始可观察维度指标。您可以按年份切换截面、搜索、排序、按区域筛选、导出 CSV，并选取多个国家生成对比图表与时间序列趋势图。</p>
+      <p class="lede" data-lang="en">This page contains panel data for 15 illustrative country cases across <strong>2019, 2021, and 2023</strong>, covering V (Responsive Elasticity), C (Conversion Rate), F (Institutional Friction), and composite RE scores, plus the four raw observable-dimension indicators. Switch year snapshots, search, sort, filter by region, export CSV, and select multiple countries to generate comparison charts and a time-series trend chart.</p>
+
+      <div class="methodology-note">
+        <span data-lang="zh"><i class="fa-solid fa-triangle-exclamation"></i> <strong>方法论声明：</strong>本数据库中的数值为<strong>示意性专家判断估计值</strong>，用于演示 RE 框架的操作化逻辑与本网站的数据可视化能力，<u>并非官方统计数据或经过同行评审的实证测量结果</u>。任何实际研究应用须基于第3节所述的多维可观察指标，通过规范的数据收集、编码与信效度检验重新构建。</span>
+        <span data-lang="en"><i class="fa-solid fa-triangle-exclamation"></i> <strong>Methodological Disclaimer:</strong> Values in this database are <strong>illustrative expert-judgment estimates</strong>, intended to demonstrate the RE framework's operationalization logic and this site's data-visualization capability — <u>they are not official statistics or peer-reviewed empirical measurements</u>. Any actual research application should reconstruct these values through rigorous data collection, coding, and validity/reliability testing based on the multidimensional observable indicators described in Section 3.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLBAR ===== -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="data-toolbar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" data-lang-placeholder-zh="搜索国家名称…" data-lang-placeholder-en="Search country name…" placeholder="搜索国家名称…">
+        </div>
+        <select id="regionFilter">
+          <option value="all" data-lang="zh">全部区域</option>
+          <option value="all" data-lang="en">All Regions</option>
+        </select>
+        <div class="year-toggle-group" id="yearToggleGroup" role="group" aria-label="Year filter">
+          <button type="button" data-year="2019">2019</button>
+          <button type="button" data-year="2021">2021</button>
+          <button type="button" class="active" data-year="2023">2023</button>
+        </div>
+        <button type="button" class="export-btn" id="exportCsvBtn">
+          <i class="fa-solid fa-file-csv"></i>
+          <span data-lang="zh">导出 CSV</span><span data-lang="en">Export CSV</span>
+        </button>
+        <span class="data-count" id="dataCount"></span>
+      </div>
+      <p class="trend-legend-hint" data-lang="zh"><i class="fa-solid fa-circle-info"></i> 年份筛选控制主表格与排行榜展示的截面；下方“时间序列趋势”图始终展示 2019–2023 全部三个年份的变化路径。</p>
+      <p class="trend-legend-hint" data-lang="en"><i class="fa-solid fa-circle-info"></i> The year filter controls the cross-sectional snapshot shown in the main table and leaderboard; the “Time-Series Trend” chart below always shows the full 2019–2023 trajectory.</p>
+
+      <div class="table-wrap">
+        <table class="sortable" id="dataTable">
+          <thead>
+            <tr>
+              <th data-key="country" data-lang="zh">国家 <span class="sort-icon"></span></th>
+              <th data-key="country" data-lang="en">Country <span class="sort-icon"></span></th>
+              <th data-key="v_score" data-lang="zh">V <span class="sort-icon"></span></th>
+              <th data-key="v_score" data-lang="en">V <span class="sort-icon"></span></th>
+              <th data-key="c_score" data-lang="zh">C <span class="sort-icon"></span></th>
+              <th data-key="c_score" data-lang="en">C <span class="sort-icon"></span></th>
+              <th data-key="f_score" data-lang="zh">F <span class="sort-icon"></span></th>
+              <th data-key="f_score" data-lang="en">F <span class="sort-icon"></span></th>
+              <th data-key="re_score" data-lang="zh">RE <span class="sort-icon"></span></th>
+              <th data-key="re_score" data-lang="en">RE <span class="sort-icon"></span></th>
+              <th data-lang="zh">操作</th><th data-lang="en">Action</th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody">
+            <!-- populated by JS -->
+          </tbody>
+        </table>
+      </div>
+      <p class="data-empty-hint" id="emptyHint" style="display:none;" data-lang="zh">未找到匹配的国家，请调整搜索或筛选条件。</p>
+      <p class="data-empty-hint" id="emptyHintEn" style="display:none;" data-lang="en">No matching countries found. Try adjusting your search or filter.</p>
+    </div>
+  </section>
+
+  <!-- ===== LEADERBOARD ===== -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-lang="zh">排行榜</span>
+        <span class="eyebrow" data-lang="en">Leaderboard</span>
+        <h2 data-lang="zh">RE 综合得分排行榜（当前筛选年份）</h2>
+        <h2 data-lang="en">RE Composite Score Ranking (Current Filtered Year)</h2>
+        <p data-lang="zh">随上方年份切换自动更新，反映当前筛选区域内各国的相对排名。</p>
+        <p data-lang="en">Updates automatically with the year toggle above, reflecting relative rankings among filtered countries.</p>
+      </div>
+      <div class="leaderboard-list" id="leaderboardList"></div>
+    </div>
+  </section>
+
+  <!-- ===== TIME SERIES TREND ===== -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-lang="zh">时间序列对比</span>
+        <span class="eyebrow" data-lang="en">Time-Series Comparison</span>
+        <h2 data-lang="zh">2019–2023 RE 变化趋势</h2>
+        <h2 data-lang="en">RE Trajectory, 2019–2023</h2>
+        <p data-lang="zh">此图不受上方年份切换影响，始终展示已选国家（或默认 Top 6）在三个面板年份中的 RE 变化路径，用于观察重配置效率的动态演变。</p>
+        <p data-lang="en">Unaffected by the year toggle above — always shows the RE trajectory of selected (or default Top-6) countries across all three panel years, for observing dynamic evolution of reallocation efficiency.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-container" style="height:420px;">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARISON SELECTION ===== -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-lang="zh">多国对比</span>
+        <span class="eyebrow" data-lang="en">Multi-Country Comparison</span>
+        <h2 data-lang="zh">已选国家用于图表对比</h2>
+        <h2 data-lang="en">Selected Countries for Chart Comparison</h2>
+        <p data-lang="zh">点击上方表格中的"加入对比"按钮，最多选择 6 个国家，下方图表将自动更新。</p>
+        <p data-lang="en">Click "Add to Compare" in the table above (up to 6 countries); the charts below update automatically.</p>
+      </div>
+      <div class="selection-tray" id="selectionTray">
+        <span class="data-empty-hint" data-lang="zh">尚未选择任何国家（默认展示全部15国前6项）</span>
+        <span class="data-empty-hint" data-lang="en">No countries selected yet (default view shows first 6 of all 15)</span>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="chart-card">
+          <h3 data-lang="zh">RE 综合得分对比（柱状图）</h3>
+          <h3 data-lang="en">RE Composite Score Comparison (Bar Chart)</h3>
+          <div class="chart-container">
+            <canvas id="compareBarChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3 data-lang="zh">V / C / F 结构对比（雷达图）</h3>
+          <h3 data-lang="en">V / C / F Structural Comparison (Radar Chart)</h3>
+          <div class="chart-container">
+            <canvas id="compareRadarChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top:24px;">
+        <h3 data-lang="zh">F - C 散点分布（气泡大小 = V，覆盖全部已选国家）</h3>
+        <h3 data-lang="en">F - C Scatter Distribution (bubble size = V, all selected countries)</h3>
+        <div class="chart-container">
+          <canvas id="compareScatterChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2 data-lang="zh">将数据接入计算器</h2>
+      <h2 data-lang="en">Load Data Into the Calculator</h2>
+      <p class="lede" data-lang="zh" style="max-width:640px; margin:0 auto 20px;">前往 RE 计算器页面，可直接选择本数据库中的国家案例，自动加载其四维度原始指标，并通过加权聚合算法推导 V/C/F 与最终 RE 值。</p>
+      <p class="lede" data-lang="en" style="max-width:640px; margin:0 auto 20px;">Go to the RE Calculator to directly select a country case from this database — its raw four-dimension indicators load automatically, and a weighted-aggregation algorithm derives V/C/F and the final RE value.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="calculator.html" class="btn btn-primary">
+          <i class="fa-solid fa-calculator"></i>
+          <span data-lang="zh">前往 RE 计算器</span><span data-lang="en">Go to RE Calculator</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p data-lang="zh">© 2026 资源重配置学派研究计划。数据库数值为示意性估计，不构成官方统计或实证结论。</p>
+      <p data-lang="en">© 2026 Resource Reallocation School Research Program. Database values are illustrative estimates, not official statistics or empirical findings.</p>
+    </div>
+    <div>
+      <a href="index.html" data-lang="zh">返回首页</a>
+      <a href="index.html" data-lang="en">Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/database.js"></script>
+</body>
+</html>

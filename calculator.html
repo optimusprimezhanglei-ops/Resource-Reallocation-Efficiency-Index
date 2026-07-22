@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE 计算器 | RE Calculator — 资源重配置学派</title>
+<meta name="description" content="交互式资源重配置效率（RE）计算器：输入反应弹性(V)、转化率(C)、制度摩擦(F)，实时计算RE = VC/(1+F)。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body class="lang-zh">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">RE</span>
+      <span class="brand-text" data-lang="zh">资源重配置学派</span>
+      <span class="brand-text" data-lang="en">Resource Reallocation School</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html" data-lang="zh">首页</a><a href="index.html" data-lang="en">Home</a></li>
+        <li><a href="paper.html" data-lang="zh">理论全文</a><a href="paper.html" data-lang="en">Full Paper</a></li>
+        <li><a href="dimensions.html" data-lang="zh">维度拆解</a><a href="dimensions.html" data-lang="en">Dimensions</a></li>
+        <li><a href="comparison.html" data-lang="zh">理论比较</a><a href="comparison.html" data-lang="en">Comparison</a></li>
+        <li><a href="database.html" data-lang="zh">数据库</a><a href="database.html" data-lang="en">Data Explorer</a></li>
+        <li><a href="sources.html" data-lang="zh">数据来源</a><a href="sources.html" data-lang="en">Data Sources</a></li>
+        <li><a href="glossary.html" data-lang="zh">术语表</a><a href="glossary.html" data-lang="en">Glossary</a></li>
+        <li><a href="calculator.html" class="nav-cta" data-lang="zh">RE 计算器</a><a href="calculator.html" class="nav-cta" data-lang="en">RE Calculator</a></li>
+      </ul>
+    </nav>
+    <button class="lang-toggle-btn">EN</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding: 48px 0 36px;">
+    <div class="container">
+      <span class="eyebrow" data-lang="zh">交互工具 · 教学演示</span>
+      <span class="eyebrow" data-lang="en">Interactive Tool · Pedagogical Demonstration</span>
+      <h1 style="font-size:2rem;" data-lang="zh">资源重配置效率（RE）计算器</h1>
+      <h1 style="font-size:2rem;" data-lang="en">Resource Reallocation Efficiency (RE) Calculator</h1>
+      <p class="lede" data-lang="zh">拖动下方滑块，设置反应弹性（V）、转化率（C）与制度摩擦（F）的假设值，实时观察 RE = VC/(1+F) 的计算结果与结构变化。本工具仅用于教学演示与理论直觉建立，不代表任何真实国家的实证测量结果。</p>
+      <p class="lede" data-lang="en">Drag the sliders below to set hypothetical values for Responsive Elasticity (V), Conversion Rate (C), and Institutional Friction (F), and observe the resulting RE = VC/(1+F) in real time. This tool is for pedagogical demonstration and building theoretical intuition only — it does not represent empirical measurements of any real country.</p>
+
+      <div class="mode-switch" id="modeSwitch">
+        <button class="active" data-mode="direct" type="button">
+          <span data-lang="zh">直接输入模式</span><span data-lang="en">Direct Input Mode</span>
+        </button>
+        <button data-mode="weighted" type="button">
+          <span data-lang="zh">加权聚合模式</span><span data-lang="en">Weighted Aggregation Mode</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DIRECT INPUT MODE ===== -->
+  <section id="directModeSection">
+    <div class="container">
+      <div class="calc-layout">
+
+        <!-- ===== INPUT PANEL ===== -->
+        <div class="calc-panel">
+          <h3 data-lang="zh"><i class="fa-solid fa-sliders"></i>&nbsp; 输入参数</h3>
+          <h3 data-lang="en"><i class="fa-solid fa-sliders"></i>&nbsp; Input Parameters</h3>
+
+          <div class="calc-field">
+            <label>
+              <span data-lang="zh">反应弹性 V（0 – 10）</span>
+              <span data-lang="en">Responsive Elasticity V (0–10)</span>
+              <span class="field-value" id="vValue">6.0</span>
+            </label>
+            <input type="range" id="vSlider" min="0" max="10" step="0.1" value="6">
+            <p class="field-desc" data-lang="zh">参照：政策调整速度、跨部门资源流动强度、战略重新排序时间模式。数值越高，代表国家对边际效用梯度变化的响应越迅速。</p>
+            <p class="field-desc" data-lang="en">Reference: policy adjustment speed, cross-sectoral flow intensity, temporal pattern of strategic reordering. Higher values indicate faster response to marginal-utility gradient shifts.</p>
+          </div>
+
+          <div class="calc-field">
+            <label>
+              <span data-lang="zh">转化率 C（0 – 10）</span>
+              <span data-lang="en">Conversion Rate C (0–10)</span>
+              <span class="field-value" id="cValue">6.0</span>
+            </label>
+            <input type="range" id="cSlider" min="0" max="10" step="0.1" value="6">
+            <p class="field-desc" data-lang="zh">参照：技术吸收能力、产业适应速度。数值越高，代表资源转化为战略成果的速度与有效性越强。</p>
+            <p class="field-desc" data-lang="en">Reference: technology absorption capacity, industrial adaptation speed. Higher values indicate faster and more effective conversion of resources into strategic outcomes.</p>
+          </div>
+
+          <div class="calc-field">
+            <label>
+              <span data-lang="zh">制度摩擦 F（0 – 10）</span>
+              <span data-lang="en">Institutional Friction F (0–10)</span>
+              <span class="field-value" id="fValue">3.0</span>
+            </label>
+            <input type="range" id="fSlider" min="0" max="10" step="0.1" value="3">
+            <p class="field-desc" data-lang="zh">参照：监管延迟、官僚僵化指数、制度程序约束。数值越高，代表制度摩擦对资源重配置的阻碍越大。</p>
+            <p class="field-desc" data-lang="en">Reference: regulatory delay, bureaucratic rigidity index, institutional procedural constraints. Higher values indicate greater institutional friction impeding reallocation.</p>
+          </div>
+
+          <div class="disclaimer">
+            <span data-lang="zh"><i class="fa-solid fa-circle-info"></i> 本计算器采用 0–10 标准化量表，供教学演示使用。实际研究中，V、C、F 应基于第三节所述的多维可观察指标，通过标准化与加权处理后得出。</span>
+            <span data-lang="en"><i class="fa-solid fa-circle-info"></i> This calculator uses a normalized 0–10 scale for pedagogical purposes. In actual research, V, C, and F should be derived from the multidimensional observable indicators described in Section 3, through standardization and weighting.</span>
+          </div>
+        </div>
+
+        <!-- ===== RESULT PANEL ===== -->
+        <div class="calc-panel">
+          <h3 data-lang="zh"><i class="fa-solid fa-chart-line"></i>&nbsp; 计算结果</h3>
+          <h3 data-lang="en"><i class="fa-solid fa-chart-line"></i>&nbsp; Calculated Result</h3>
+
+          <div class="calc-result">
+            <div data-lang="zh" style="font-size:0.9rem; color:#cdbfa0;">资源重配置效率 RE</div>
+            <div data-lang="en" style="font-size:0.9rem; color:#cdbfa0;">Resource Reallocation Efficiency RE</div>
+            <div class="value" id="reResult">3.00</div>
+            <div class="band" id="reBand">—</div>
+          </div>
+
+          <div class="chart-container small">
+            <canvas id="reGauge"></canvas>
+          </div>
+
+          <div class="table-wrap" style="margin-top:20px; box-shadow:none;">
+            <table style="min-width:auto;">
+              <tbody>
+                <tr>
+                  <th data-lang="zh">V × C（分子）</th><th data-lang="en">V × C (Numerator)</th>
+                  <td id="numResult">36.00</td>
+                </tr>
+                <tr>
+                  <th data-lang="zh">1 + F（分母）</th><th data-lang="en">1 + F (Denominator)</th>
+                  <td id="denResult">4.00</td>
+                </tr>
+                <tr>
+                  <th data-lang="zh">理论上限 (F=0 时)</th><th data-lang="en">Theoretical Ceiling (F=0)</th>
+                  <td id="ceilResult">36.00</td>
+                </tr>
+                <tr>
+                  <th data-lang="zh">摩擦造成的效率损失</th><th data-lang="en">Efficiency Loss Due to Friction</th>
+                  <td id="lossResult">75.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="field-desc" style="margin-top:16px;" data-lang="zh">解读提示：RE 数值本身并无绝对"好坏"阈值，其意义在于跨国、跨时段的<strong>相对比较</strong>。下方色带仅为教学演示中的示意性分档，非理论规定的标准阈值。</p>
+          <p class="field-desc" style="margin-top:16px;" data-lang="en">Interpretation note: RE values carry no absolute "good/bad" threshold on their own; their meaning lies in <strong>relative comparison</strong> across countries and time periods. The color bands below are illustrative for pedagogical purposes only, not theoretically mandated thresholds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WEIGHTED AGGREGATION MODE ===== -->
+  <section id="weightedModeSection" style="display:none;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-lang="zh">从原始维度指标推导 V / C / F</span>
+        <span class="eyebrow" data-lang="en">Deriving V / C / F From Raw Dimension Indicators</span>
+        <h2 data-lang="zh">加权聚合算法</h2>
+        <h2 data-lang="en">Weighted Aggregation Algorithm</h2>
+        <p data-lang="zh">本模式模拟论文第3节所述的操作化路径：从四个可观察维度的原始指标（0–10标度）出发，通过可调权重加权聚合，推导出 V、C、F，再代入 RE 公式。您可以从数据库中加载真实案例，或手动调整原始指标与权重。</p>
+        <p data-lang="en">This mode simulates the operationalization path described in Section 3: starting from raw indicators (0–10 scale) across the four observable dimensions, weighted aggregation derives V, C, and F, which then feed into the RE formula. Load a case from the database or manually adjust raw indicators and weights.</p>
+      </div>
+
+      <div class="country-select-row">
+        <select id="countryLoadSelect">
+          <option value="" data-lang="zh">— 从数据库加载国家案例 —</option>
+          <option value="" data-lang="en">— Load a country case from the database —</option>
+        </select>
+        <button class="btn btn-outline" id="resetWeightedBtn" type="button">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span data-lang="zh">重置为默认值</span><span data-lang="en">Reset to Defaults</span>
+        </button>
+      </div>
+
+      <div class="calc-layout">
+        <!-- Raw indicators + weights -->
+        <div class="calc-panel">
+          <h3 data-lang="zh"><i class="fa-solid fa-table-cells"></i>&nbsp; 原始维度指标与权重</h3>
+          <h3 data-lang="en"><i class="fa-solid fa-table-cells"></i>&nbsp; Raw Dimension Indicators &amp; Weights</h3>
+
+          <div class="weight-grid">
+            <div>
+              <div class="mini-field">
+                <label><span data-lang="zh">财政响应能力（原始，0–10）</span><span data-lang="en">Fiscal Responsiveness (raw, 0–10)</span><span class="mini-value" id="fiscalRawVal">7.0</span></label>
+                <input type="range" id="fiscalRaw" min="0" max="10" step="0.1" value="7">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">技术转换速度（原始，0–10）</span><span data-lang="en">Tech Conversion Speed (raw, 0–10)</span><span class="mini-value" id="techRawVal">7.0</span></label>
+                <input type="range" id="techRaw" min="0" max="10" step="0.1" value="7">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">监管适应性（原始，0–10）</span><span data-lang="en">Regulatory Adaptability (raw, 0–10)</span><span class="mini-value" id="regRawVal">6.0</span></label>
+                <input type="range" id="regRaw" min="0" max="10" step="0.1" value="6">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">官僚摩擦（原始，0–10）</span><span data-lang="en">Bureaucratic Friction (raw, 0–10)</span><span class="mini-value" id="bureauRawVal">4.0</span></label>
+                <input type="range" id="bureauRaw" min="0" max="10" step="0.1" value="4">
+              </div>
+            </div>
+            <div>
+              <div class="mini-field">
+                <label><span data-lang="zh">财政 → V 权重</span><span data-lang="en">Fiscal → V Weight</span><span class="mini-value" id="wFiscalVal">0.50</span></label>
+                <input type="range" id="wFiscal" min="0" max="1" step="0.05" value="0.5">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">技术 → C 权重</span><span data-lang="en">Tech → C Weight</span><span class="mini-value" id="wTechVal">0.60</span></label>
+                <input type="range" id="wTech" min="0" max="1" step="0.05" value="0.6">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">监管适应性 → F 权重（反向）</span><span data-lang="en">Regulatory → F Weight (reversed)</span><span class="mini-value" id="wRegVal">0.50</span></label>
+                <input type="range" id="wReg" min="0" max="1" step="0.05" value="0.5">
+              </div>
+              <div class="mini-field">
+                <label><span data-lang="zh">官僚摩擦 → F 权重</span><span data-lang="en">Bureaucratic → F Weight</span><span class="mini-value" id="wBureauVal">0.50</span></label>
+                <input type="range" id="wBureau" min="0" max="1" step="0.05" value="0.5">
+              </div>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <span data-lang="zh"><i class="fa-solid fa-circle-info"></i> 聚合公式（教学演示版）：V = 财政响应能力 × w财政 + (10 − 官僚摩擦) × (1−w财政)；C = 技术转换速度 × w技术 + 监管适应性 × (1−w技术)；F = 官僚摩擦 × w官僚 + (10 − 监管适应性) × w监管，并归一化至 0–10。该公式仅为示意性设计，实际研究需基于因子分析或专家赋权法确定。</span>
+            <span data-lang="en"><i class="fa-solid fa-circle-info"></i> Aggregation formula (pedagogical version): V = Fiscal × w(fiscal) + (10 − Bureaucratic) × (1−w(fiscal)); C = Tech × w(tech) + Regulatory × (1−w(tech)); F = Bureaucratic × w(bureau) + (10 − Regulatory) × w(reg), normalized to 0–10. This formula is illustrative only; actual research should determine weights via factor analysis or expert elicitation.</span>
+          </div>
+        </div>
+
+        <!-- Derived result -->
+        <div class="calc-panel">
+          <h3 data-lang="zh"><i class="fa-solid fa-chart-line"></i>&nbsp; 推导结果</h3>
+          <h3 data-lang="en"><i class="fa-solid fa-chart-line"></i>&nbsp; Derived Result</h3>
+
+          <div class="calc-result">
+            <div data-lang="zh" style="font-size:0.9rem; color:#cdbfa0;">资源重配置效率 RE（加权推导）</div>
+            <div data-lang="en" style="font-size:0.9rem; color:#cdbfa0;">Resource Reallocation Efficiency RE (weighted derivation)</div>
+            <div class="value" id="reResultWeighted">—</div>
+            <div class="band" id="reBandWeighted">—</div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:20px; box-shadow:none;">
+            <table style="min-width:auto;">
+              <tbody>
+                <tr>
+                  <th data-lang="zh">推导后 反应弹性 V</th><th data-lang="en">Derived Responsive Elasticity V</th>
+                  <td id="derivedV">—</td>
+                </tr>
+                <tr>
+                  <th data-lang="zh">推导后 转化率 C</th><th data-lang="en">Derived Conversion Rate C</th>
+                  <td id="derivedC">—</td>
+                </tr>
+                <tr>
+                  <th data-lang="zh">推导后 制度摩擦 F</th><th data-lang="en">Derived Institutional Friction F</th>
+                  <td id="derivedF">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="chart-container small" style="margin-top:20px;">
+            <canvas id="weightedGauge"></canvas>
+          </div>
+
+          <p class="field-desc" style="margin-top:12px;" data-lang="zh">提示：切换回"直接输入模式"可查看该 V/C/F 组合下更详细的分子/分母/损失分解。</p>
+          <p class="field-desc" style="margin-top:12px;" data-lang="en">Tip: switch back to "Direct Input Mode" to see a more detailed numerator/denominator/loss breakdown for this V/C/F combination.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SENSITIVITY EXPLANATION ===== -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-lang="zh">机制说明</span>
+        <span class="eyebrow" data-lang="en">Mechanism Notes</span>
+        <h2 data-lang="zh">为什么制度摩擦（F）的边际影响会递减？</h2>
+        <h2 data-lang="en">Why Does the Marginal Impact of Institutional Friction (F) Diminish?</h2>
+        <p data-lang="zh">由于分母采用 "1+F" 的形式，F 每增加一个单位所造成的 RE 折减幅度，会随着 F 基数的增大而递减（即摩擦的边际抑制效应递减）。这意味着：在低摩擦国家，进一步降低摩擦的边际收益更大；而在高摩擦国家，单纯依靠降低摩擦已难以显著提升 RE，需同时提升 V 与 C。</p>
+        <p data-lang="en">Because the denominator takes the form "1+F", the reduction in RE caused by each additional unit of F diminishes as the base value of F grows (i.e., friction's marginal suppressive effect diminishes). This implies that in low-friction states, further reducing friction yields larger marginal gains, whereas in high-friction states, reducing friction alone can no longer meaningfully raise RE — improvements in V and C become equally necessary.</p>
+      </div>
+      <div class="chart-card">
+        <h3 data-lang="zh">RE 对 F 的敏感度曲线（固定 V=6, C=6）</h3>
+        <h3 data-lang="en">RE Sensitivity Curve with Respect to F (fixed V=6, C=6)</h3>
+        <div class="chart-container">
+          <canvas id="sensitivityChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2 data-lang="zh">深入了解理论基础</h2>
+      <h2 data-lang="en">Learn More About the Theoretical Foundations</h2>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="paper.html" class="btn btn-primary">
+          <i class="fa-solid fa-file-lines"></i>
+          <span data-lang="zh">阅读理论全文</span><span data-lang="en">Read Full Paper</span>
+        </a>
+        <a href="dimensions.html" class="btn btn-outline">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span data-lang="zh">查看维度拆解</span><span data-lang="en">View Dimensions</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p data-lang="zh">© 2026 资源重配置学派研究计划。计算器结果仅供教学演示，不构成实证结论。</p>
+      <p data-lang="en">© 2026 Resource Reallocation School Research Program. Calculator results are for pedagogical demonstration only and do not constitute empirical findings.</p>
+    </div>
+    <div>
+      <a href="index.html" data-lang="zh">返回首页</a>
+      <a href="index.html" data-lang="en">Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/calculator.js"></script>
+</body>
+</html>
